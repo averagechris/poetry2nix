@@ -625,20 +625,6 @@ self: super:
     }
   );
 
-  inquirer = super.inquirer.overridePythonAttrs (
-    old: {
-      preBuild = old.preBuild or "" + ''
-        substituteInPlace setup.py --replace 'version = "3.0.0"' 'version = "${old.version}"'
-      '';
-      preConfigure = (old.preConfigure or "") + ''cat << EOF > requirements.txt
-blessed==1.19.0
-readchar==2.0.1
-python-editor==1.0.4
-EOF
-      '';
-    }
-  );
-
   intreehooks = super.intreehooks.overridePythonAttrs (
     old: {
       doCheck = false;
